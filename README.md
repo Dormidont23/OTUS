@@ -1,4 +1,4 @@
-Задание № 3.
+**Задание № 3.**
 
 - Добавить в Vagrantfile еще дисков.
 - Собрать RAID-массив уровня 0/5/10 на выбор.
@@ -9,7 +9,7 @@
 Ход решения
 
 
-[root@otus-task3 ~]# lsblk
+[root@otus-task3 ~]# **lsblk**
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda      8:0    0  250M  0 disk
 sdb      8:16   0  250M  0 disk
