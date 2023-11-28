@@ -8,8 +8,7 @@
 
 ## Ход решения ##
 
-Список блочных устройств (дисков).
-
+Список блочных устройств (дисков).\
 [root@otus-task3 ~]# **lsblk**
 
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
