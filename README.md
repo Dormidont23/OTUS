@@ -26,6 +26,7 @@ sdf      8:80   0   40G  0 disk
 Создание RAID 5 из 5 дисков.
 
 **mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}**
+
 Посмотреть текущее состояние RAID'а
 [root@otus-task3 ~]# **cat /proc/mdstat**
 Personalities : [raid6] [raid5] [raid4]
@@ -40,12 +41,16 @@ echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
 mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 
 **Сломать/починить RAID**
+
 Назничим диск sde сломаным.
 mdadm /dev/md0 --fail /dev/sde
+
 И "вытащим" его из серевера.
 mdadm /dev/md0 --remove /dev/sde
+
 А теперь добавим новый исправный диск.
 mdadm /dev/md0 --add /dev/sde
+
 Ребилд идёт успешно.
 [root@otus-task3 ~]# cat /proc/mdstat
 Personalities : [raid6] [raid5] [raid4]
