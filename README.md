@@ -19,15 +19,12 @@ sde      8:64   0  250M  0 disk\
 sdf      8:80   0   40G  0 disk\
 └─sdf1   8:81   0   40G  0 part /
 
-**Создание RAID**
+## Создание RAID ##
 
-Создание RAID 5 из 5 дисков.
-
-**mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}**
-
-Посмотреть текущее состояние RAID'а
-
-[root@otus-task3 ~]# **cat /proc/mdstat**
+Создание RAID 5 из 5 дисков.\
+**mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}**\
+Посмотреть текущее состояние RAID'а\
+[root@otus-task3 ~]# **cat /proc/mdstat**\
 Personalities : [raid6] [raid5] [raid4]
 md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]
       1015808 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/5] [UUUUU]
