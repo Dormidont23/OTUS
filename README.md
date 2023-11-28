@@ -6,8 +6,7 @@
 - Сломать/починить RAID.
 - Создать GPT-таблицу и 5 разделов поверх массива, смонтировать их в системе.
 
-Ход решения
-
+**Ход решения**
 
 [root@otus-task3 ~]# **lsblk**
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -19,7 +18,7 @@ sde      8:64   0  250M  0 disk
 sdf      8:80   0   40G  0 disk
 └─sdf1   8:81   0   40G  0 part /
 
-Создание RAID 5
+**Создание RAID 5**
 
 mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}
 
@@ -30,13 +29,13 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]
 
 unused devices: <none>
 
-Создание конфигурационного файла mdadm.conf
+**Создание конфигурационного файла mdadm.conf**
 
 mkdir /etc/mdadm
 echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
 mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 
-Сломать/починить RAID
+**Сломать/починить RAID**
 
 mdadm /dev/md0 --fail /dev/sde
 
@@ -49,7 +48,7 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]
       1015808 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/4] [UUUU_]
       [========>............]  recovery = 44.6% (113792/253952) finish=0.3min speed=6693K/sec
 
-Создать GPT-таблицу и 5 разделов, смонтировать их в системе
+**Создать GPT-таблицу и 5 разделов, смонтировать их в системе**
 
 parted -s /dev/md0 mklabel gpt
 
@@ -102,3 +101,11 @@ sde         8:64   0  250M  0 disk
   └─md0p5 259:4    0  196M  0 md    /raid/part5
 sdf         8:80   0   40G  0 disk
 └─sdf1      8:81   0   40G  0 part  /
+
+И, в заключении, поправим файл /etc/fstab, чтобы разделы монтировалсь после перезагрузки. Добавим 5 строк:
+
+/dev/md0p1                      /raid/part1             ext4            defaults        1 2
+/dev/md0p2                      /raid/part2             ext4            defaults        1 2
+/dev/md0p3                      /raid/part3             ext4            defaults        1 2
+/dev/md0p4                      /raid/part4             ext4            defaults        1 2
+/dev/md0p5                      /raid/part5             ext4            defaults        1 2
