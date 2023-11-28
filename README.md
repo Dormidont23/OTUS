@@ -33,20 +33,20 @@ unused devices: <none>
 
 **Создание конфигурационного файла mdadm.conf**
 
-mkdir /etc/mdadm\
-echo "DEVICE partitions" > /etc/mdadm/mdadm.conf\
-mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+**mkdir /etc/mdadm**\
+**echo "DEVICE partitions" > /etc/mdadm/mdadm.conf**\
+**mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf**
 
 **Сломать/починить RAID**
 
 Назничим диск sde сломаным.\
-mdadm /dev/md0 --fail /dev/sde\
+**mdadm /dev/md0 --fail /dev/sde**\
 
 И "вытащим" его из серевера.\
-mdadm /dev/md0 --remove /dev/sde\
+**mdadm /dev/md0 --remove /dev/sde**\
 
 А теперь добавим новый исправный диск.\
-mdadm /dev/md0 --add /dev/sde\
+**mdadm /dev/md0 --add /dev/sde**\
 
 Ребилд идёт успешно.\
 [root@otus-task3 ~]# **cat /proc/mdstat**\
@@ -58,24 +58,24 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]\
 **Создать GPT-таблицу и 5 разделов, смонтировать их в системе**
 
 Создать таблицу разделов GPT.\
-parted -s /dev/md0 mklabel gpt\
+**parted -s /dev/md0 mklabel gpt**\
 
 Создать сами разделы.\
-parted /dev/md0 mkpart primary ext4 0% 20%\
-parted /dev/md0 mkpart primary ext4 20% 40%\
-parted /dev/md0 mkpart primary ext4 40% 60%\
-parted /dev/md0 mkpart primary ext4 60% 80%\
-parted /dev/md0 mkpart primary ext4 80% 100%\
+**parted /dev/md0 mkpart primary ext4 0% 20%**\
+**parted /dev/md0 mkpart primary ext4 20% 40%**\
+**parted /dev/md0 mkpart primary ext4 40% 60%**\
+**parted /dev/md0 mkpart primary ext4 60% 80%**\
+**parted /dev/md0 mkpart primary ext4 80% 100%**
 
 Создать на этих разделах файловую систему ext4.\
-for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done\
-mkdir -p /raid/part{1,2,3,4,5}\
+**for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done**\
+**mkdir -p /raid/part{1,2,3,4,5}**
 
 И смонтировать всё это безобразие.\
-for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done\
+**for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done**
 
 Посмотреть, что получилось.\
-[root@otus-task3 ~]# lsblk\
+[root@otus-task3 ~]# **lsblk**\
 NAME      MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT\
 sda         8:0    0  250M  0 disk\
 └─md0       9:0    0  992M  0 raid5\
