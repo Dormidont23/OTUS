@@ -21,7 +21,9 @@ sdf      8:80   0   40G  0 disk
 └─sdf1   8:81   0   40G  0 part /
 
 **Создание RAID**
+
 Создание RAID 5 из 5 дисков.
+
 mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}
 Посмотреть текущее состояние RAID'а
 [root@otus-task3 ~]# cat /proc/mdstat
