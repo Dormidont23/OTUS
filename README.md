@@ -28,6 +28,7 @@ sdf      8:80   0   40G  0 disk
 **mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}**
 
 Посмотреть текущее состояние RAID'а
+
 [root@otus-task3 ~]# **cat /proc/mdstat**
 Personalities : [raid6] [raid5] [raid4]
 md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]
