@@ -19,7 +19,7 @@ sde      8:64   0  250M  0 disk\
 sdf      8:80   0   40G  0 disk\
 └─sdf1   8:81   0   40G  0 part /
 
-### Создание RAID ###
+**Создание RAID**
 
 Создание RAID 5 из 5 дисков.\
 **mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{a,b,c,d,e}**\
@@ -30,13 +30,13 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]\
       1015808 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/5] [UUUUU]\
 unused devices: <none>
 
-### Создание конфигурационного файла mdadm.conf ###
+**Создание конфигурационного файла mdadm.conf**
 
 mkdir /etc/mdadm\
 echo "DEVICE partitions" > /etc/mdadm/mdadm.conf\
 mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 
-### Сломать/починить RAID ###
+**Сломать/починить RAID**
 
 Назничим диск sde сломаным.\
 mdadm /dev/md0 --fail /dev/sde\
@@ -51,7 +51,7 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]\
       1015808 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/4] [UUUU_]\
       [========>............]  recovery = 44.6% (113792/253952) finish=0.3min speed=6693K/sec
 
-### Создать GPT-таблицу и 5 разделов, смонтировать их в системе ###
+**Создать GPT-таблицу и 5 разделов, смонтировать их в системе**
 
 Создать таблицу разделов GPT.\
 parted -s /dev/md0 mklabel gpt\
