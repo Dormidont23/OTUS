@@ -10,13 +10,13 @@
 
 Список блочных устройств (дисков).\
 [root@otus-task3 ~]# **lsblk**\
-NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda      8:0    0  250M  0 disk
-sdb      8:16   0  250M  0 disk
-sdc      8:32   0  250M  0 disk
-sdd      8:48   0  250M  0 disk
-sde      8:64   0  250M  0 disk
-sdf      8:80   0   40G  0 disk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT\
+sda      8:0    0  250M  0 disk\
+sdb      8:16   0  250M  0 disk\
+sdc      8:32   0  250M  0 disk\
+sdd      8:48   0  250M  0 disk\
+sde      8:64   0  250M  0 disk\
+sdf      8:80   0   40G  0 disk\
 └─sdf1   8:81   0   40G  0 part /
 
 **Создание RAID**
