@@ -9,6 +9,7 @@
 **Ход решения**
 
 Список блочных устройств (диков).
+
 [root@otus-task3 ~]# **lsblk**
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda      8:0    0  250M  0 disk
