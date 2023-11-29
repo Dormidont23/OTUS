@@ -40,10 +40,10 @@ unused devices: <none>
 **Сломать/починить RAID**
 
 Назничим диск sde сломаным.\
-**mdadm /dev/md0 --fail /dev/sde**\
+**mdadm /dev/md0 --fail /dev/sde**
 
 И "вытащим" его из серевера.\
-**mdadm /dev/md0 --remove /dev/sde**\
+**mdadm /dev/md0 --remove /dev/sde**
 
 А теперь добавим новый исправный диск.\
 **mdadm /dev/md0 --add /dev/sde**\
