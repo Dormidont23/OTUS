@@ -46,7 +46,7 @@ unused devices: <none>
 **mdadm /dev/md0 --remove /dev/sde**
 
 А теперь добавим новый исправный диск.\
-**mdadm /dev/md0 --add /dev/sde**\
+**mdadm /dev/md0 --add /dev/sde**
 
 Ребилд идёт успешно.\
 [root@otus-task3 ~]# **cat /proc/mdstat**\
@@ -58,7 +58,7 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]\
 **Создать GPT-таблицу и 5 разделов, смонтировать их в системе**
 
 Создать таблицу разделов GPT.\
-**parted -s /dev/md0 mklabel gpt**\
+**parted -s /dev/md0 mklabel gpt**
 
 Создать сами разделы.\
 **parted /dev/md0 mkpart primary ext4 0% 20%**\
