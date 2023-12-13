@@ -69,7 +69,7 @@ md0 : active raid5 sde[5] sdd[3] sdc[2] sdb[1] sda[0]\
 
 Создать на этих разделах файловую систему ext4.\
 **for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done**\
-Создать 5 катлогов для монтирования.\
+Создать 5 каталогов для монтирования.\
 **mkdir -p /raid/part{1,2,3,4,5}**\
 И смонтировать всё это безобразие.\
 **for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done**
